@@ -1,0 +1,51 @@
+  <p>This project will generate random numbers according to user input.</p>
+  <p>Then select the type of Graph and press Start Sorting button</p>
+  <p>Then program will make Graph and start sorting of the numbers</p>
+  <mat-form-field>
+    <mat-label>Minimum Value</mat-label>
+    <input matInput placeholder="Enter minimum" (keyup)="minimumValue(min)" #min>
+  </mat-form-field>
+
+  &nbsp;
+
+  <mat-form-field>
+    <mat-label>Maximum Value</mat-label>
+    <input matInput placeholder="Enter maximum" (keyup)="maximumValue(max)" #max>
+  </mat-form-field>
+
+  &nbsp;
+
+  <mat-form-field>
+    <mat-label>Quantity</mat-label>
+    <input matInput placeholder="Enter quantity" (keyup)="quantityValue(quant)" #quant>
+  </mat-form-field>
+
+<br>
+
+<mat-form-field>
+  <mat-label>Type of Graph</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let graph of graphs" [value]="graph.viewValue" (click)="setGraphType(graph.viewValue)">
+      {{graph.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+&nbsp;
+
+<button mat-raised-button (click)= "doQuickSort()">Start Sorting</button>
+
+<div  *ngIf="chartReady">
+  <div class="chartContainer">
+    <canvas baseChart
+    width="400" height="120%"
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [legend]="barChartLegend"
+    [chartType]="barChartType"></canvas>
+  </div>
+</div>
+
+
+
