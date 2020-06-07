@@ -92,15 +92,17 @@ export class QuicksortAlgoComponent implements OnInit {
     this.chartReady = true;
     this.generateChart(arr);
     for (let i = 0; i < arr.length; i++) {
-      setInterval(() => {
-        for (j = i; j < arr.length; j++) {
-          if (arr[i] > arr[j]) {
-            let temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-          }
-        }
-      }, 2);
+      for (j = i; j < arr.length; j++) {
+        setTimeout(function (y) {
+           if (arr[y[0]] > arr[y[1]]) {
+             let temp = arr[y[0]];
+             arr[y[0]] = arr[y[1]];
+             arr[y[1]] = temp;
+             this.generateChart(arr);
+           }
+
+      }, j * 50, [i,j]);
+      }
     }
     return arr;
   }
